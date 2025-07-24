@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Café Assistant - Your Smart Cafe Companion</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-coffee"></i>
+                    <h1>Café Assistant</h1>
+                </div>
+                <div class="header-info">
+                    <span class="status online">
+                        <i class="fas fa-circle"></i>
+                        Online
+                    </span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Chat Container -->
+        <div class="chat-container">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <h3><i class="fas fa-bars"></i> Quick Actions</h3>
+                </div>
+                <div class="quick-actions">
+                    <button class="action-btn" data-action="menu">
+                        <i class="fas fa-utensils"></i>
+                        <span>View Menu</span>
+                    </button>
+                    <button class="action-btn" data-action="order">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Place Order</span>
+                    </button>
+                    <button class="action-btn" data-action="reservation">
+                        <i class="fas fa-calendar"></i>
+                        <span>Make Reservation</span>
+                    </button>
+                    <button class="action-btn" data-action="location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Location & Hours</span>
+                    </button>
+                    <button class="action-btn" data-action="offers">
+                        <i class="fas fa-gift"></i>
+                        <span>Special Offers</span>
+                    </button>
+                    <button class="action-btn" data-action="loyalty">
+                        <i class="fas fa-star"></i>
+                        <span>Loyalty Points</span>
+                    </button>
+                </div>
+
+                <!-- Current Order Summary -->
+                <div class="order-summary">
+                    <h4><i class="fas fa-receipt"></i> Current Order</h4>
+                    <div id="orderItems" class="order-items">
+                        <p class="empty-order">No items in order</p>
+                    </div>
+                    <div class="order-total">
+                        <strong>Total: $<span id="orderTotal">0.00</span></strong>
+                    </div>
+                    <button id="checkoutBtn" class="checkout-btn" disabled>
+                        <i class="fas fa-credit-card"></i>
+                        Checkout
+                    </button>
+                </div>
+            </div>
+
+            <!-- Chat Area -->
+            <div class="chat-area">
+                <!-- Chat Messages -->
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message bot-message welcome-message">
+                        <div class="message-avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="message-content">
+                            <div class="message-text">
+                                <h3>Welcome to Café Assistant! ☕</h3>
+                                <p>I'm here to help you with:</p>
+                                <ul>
+                                    <li>📱 Browsing our delicious menu</li>
+                                    <li>🛒 Placing orders</li>
+                                    <li>📅 Making reservations</li>
+                                    <li>❓ Answering your questions</li>
+                                    <li>🎁 Finding special offers</li>
+                                </ul>
+                                <p>How can I assist you today?</p>
+                            </div>
+                            <div class="quick-suggestions">
+                                <button class="suggestion-btn" data-suggestion="Show me today's specials">
+                                    Today's Specials
+                                </button>
+                                <button class="suggestion-btn" data-suggestion="I want to order coffee">
+                                    Order Coffee
+                                </button>
+                                <button class="suggestion-btn" data-suggestion="What are your opening hours?">
+                                    Opening Hours
+                                </button>
+                            </div>
+                        </div>
+                        <div class="message-time">Just now</div>
+                    </div>
+                </div>
+
+                <!-- Typing Indicator -->
+                <div class="typing-indicator" id="typingIndicator" style="display: none;">
+                    <div class="message bot-message">
+                        <div class="message-avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="message-content">
+                            <div class="typing-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Input Area -->
+                <div class="input-area">
+                    <div class="input-container">
+                        <button class="attachment-btn" id="attachmentBtn">
+                            <i class="fas fa-paperclip"></i>
+                        </button>
+                        <input type="text" id="messageInput" placeholder="Type your message..." autocomplete="off">
+                        <button class="emoji-btn" id="emojiBtn">
+                            <i class="fas fa-smile"></i>
+                        </button>
+                        <button class="send-btn" id="sendBtn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <div class="input-suggestions" id="inputSuggestions"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for Menu, Reservations, etc. -->
+        <div class="modal" id="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modalTitle">Modal Title</h2>
+                    <button class="modal-close" id="modalClose">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <!-- Modal content will be inserted here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Notification System -->
+        <div class="notification-container" id="notificationContainer"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
